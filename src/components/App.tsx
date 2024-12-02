@@ -204,14 +204,14 @@ const App = () => {
         >
           <img src={prbIcon} alt="PRB" className={styles.bankIcon} />
         </button>
-        <button
+{/*         <button
           className={`${styles.bankButton} ${
             selectedBank === "SBER" ? styles.activeBank : ""
           }`}
           onClick={() => setSelectedBank("SBER")}
         >
           <img src={sberIcon} alt="SBER" className={styles.bankIcon} />
-        </button>
+        </button> */}
         <button
           className={`${styles.bankButton} ${
             selectedBank === "AGRO" ? styles.activeBank : ""
