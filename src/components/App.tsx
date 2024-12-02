@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from ".././styles/App.module.css";
 import Block from "./Block";
 import prbIcon from ".././assets/prb-logo.jpg";
-import sberIcon from ".././assets/sber-logo.jpeg";
+// import sberIcon from ".././assets/sber-logo.jpeg";
 import agroIcon from ".././assets/agro-logo.jpg";
 import axios from "axios";
 import { getCurrencies } from "./utils/getCurrencies";
