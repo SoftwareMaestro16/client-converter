@@ -144,8 +144,6 @@ const App = () => {
     }
   };
 
-  handleSwap();
-
   const currencies = getCurrencies(selectedBank);
 
   if (isLoading) {
