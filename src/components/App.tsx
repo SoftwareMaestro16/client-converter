@@ -37,7 +37,7 @@ const App = () => {
     const fetchRates = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("http://localhost:3000/");
+        const response = await axios.get("https://server-converter-bqar03n22-softwaremaestros-projects.vercel.app/");
         const data = response.data;
 
         if (data) {
