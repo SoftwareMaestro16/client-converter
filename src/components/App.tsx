@@ -37,7 +37,7 @@ const App = () => {
     const fetchRates = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("https://server-converter.onrender.com/");
+        const response = await axios.get("https://server-converter-kiav.onrender.com/");
         const data = response.data;
 
         if (data) {
