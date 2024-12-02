@@ -204,7 +204,7 @@ const App = () => {
         >
           <img src={prbIcon} alt="PRB" className={styles.bankIcon} />
         </button>
-     {/*  <button
+      {/* <button
           className={`${styles.bankButton} ${
             selectedBank === "SBER" ? styles.activeBank : ""
           }`}
