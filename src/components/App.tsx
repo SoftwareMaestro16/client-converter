@@ -37,7 +37,7 @@ const App = () => {
     const fetchRates = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("https://visionary-paprenjak-54e0a7.netlify.app/");
+        const response = await axios.get("https://server-converter.onrender.com/");
         const data = response.data;
 
         if (data) {
