@@ -176,7 +176,7 @@ const App = () => {
         <div className={styles.swapButton} onClick={handleSwap}>
           <img
             className={styles.imageSwap}
-            src="https://cdn-icons-png.flaticon.com/512/7133/7133490.png"
+            src="https://cdn-icons-png.flaticon.com/512/7133/7133490.png" 
             alt="⟷"
           />
         </div>
