@@ -55,10 +55,24 @@ body {
   margin: 20px auto;
   padding: 20px;
   background-color: #ffffff;
-  border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  position: relative;
+}
+
+.exchangeBlock::before {
+  content: "";
+  position: absolute;
+  top: -1.5px;
+  left: -1.5px;
+  right: -1.5px;
+  bottom: -1.5px;
+  border-radius: 11.5px;
+  background: linear-gradient(45deg, #ff0000, #ff0000, #00ff00, #ff0000, #ff0000);
+  background-size: 200% 200%;
+  animation: borderAnimation 3s ease-in-out infinite;
+  z-index: -1;
 }
 
 .swapButton {
@@ -67,7 +81,24 @@ body {
   justify-content: center;
   width: 50px;
   height: 40px;
-  margin: 0 auto; 
+  margin: 0 auto;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.swapButton::before {
+  content: "";
+  position: absolute;
+  top: -1.5px;
+  left: -1.5px;
+  right: -1.5px;
+  bottom: -1.5px;
+  border-radius: 11.5px;
+  background: linear-gradient(45deg, #ff0000, #ff0000, #00ff00, #ff0000, #ff0000);
+  background-size: 200% 200%;
+  animation: borderAnimation 3s ease-in-out infinite;
+  z-index: -1;
 }
 
 .imageSwap {
@@ -99,28 +130,28 @@ body {
   cursor: pointer;
   padding: 9px;
   border-radius: 50%;
-  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; 
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .bankButton:hover {
   transform: scale(1.1);
   background-color: #f0f0f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .bankIcon {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 .activeBank {
-  border: 2px solid #717171; 
-  background-color: #e6f3ff; 
-  box-shadow: 0 4px 14px rgba(0, 123, 255, 0.3); 
+  border: 2px solid #717171;
+  background-color: #e6f3ff;
+  box-shadow: 0 4px 14px rgba(0, 123, 255, 0.3);
   transform: scale(1.05);
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
 }
 
 .ratesTable {
@@ -129,9 +160,35 @@ body {
   margin: 20px auto;
   padding: 15px;
   background-color: #ffffff;
-  border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.ratesTable::before {
+  content: "";
+  position: absolute;
+  top: -1.5px;
+  left: -1.5px;
+  right: -1.5px;
+  bottom: -1.5px;
+  border-radius: 11.5px;
+  background: linear-gradient(45deg, #ff0000, #ff0000, #00ff00, #ff0000, #ff0000);
+  background-size: 200% 200%;
+  animation: borderAnimation 3s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes borderAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
 .ratesTable table {

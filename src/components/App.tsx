@@ -34,7 +34,7 @@ const App = () => {
   const [receiveCurrency, setReceiveCurrency] = useState<string>("USD");
   const [selectedBank, setSelectedBank] = useState<string>("PRB");
   const [sellAmount, setSellAmount] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [conversionResult, setConversionResult] = useState<number>(0);
 
   useEffect(() => {
@@ -148,7 +148,6 @@ const App = () => {
 
   const currencies = getCurrencies(selectedBank);
 
-  // Список валют для таблицы
   const tableCurrencies = [
     { ticker: "USD", flag: usdFlag },
     { ticker: "EUR", flag: eurFlag },
@@ -157,7 +156,6 @@ const App = () => {
     { ticker: "UAH", flag: uahFlag },
   ];
 
-  // Получение курсов для выбранного банка
   const selectedRates =
     selectedBank === "PRB"
       ? rates.prb
@@ -214,7 +212,6 @@ const App = () => {
         />
       </div>
 
-      {/* Таблица курсов */}
       <div className={styles.ratesTable}>
         <table>
           <thead>
