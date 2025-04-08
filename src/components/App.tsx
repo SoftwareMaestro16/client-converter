@@ -51,7 +51,7 @@ const App = () => {
       WebApp.ready();
       WebApp.enableClosingConfirmation();
       WebApp.expand();
-      WebApp.setHeaderColor('#ff0000'); 
+      WebApp.setHeaderColor('#c71c27'); 
       
       document.body.style.backgroundColor = '#ffffff';
     }
