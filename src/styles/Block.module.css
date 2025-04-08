@@ -1,5 +1,5 @@
 .exchangeBlock {
-    width: 90%;
+    width: 90vw;
     max-width: 500px;
     margin: 20px auto;
     padding: 20px;
@@ -84,7 +84,6 @@
   display: flex;
   align-items: center;
   width: 77px;
-  
   height: 40px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -102,7 +101,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  max-height: 250px; 
+  max-height: 135px; 
   overflow-y: auto;
   background-color: #fff;
   border: 1px solid #ccc;

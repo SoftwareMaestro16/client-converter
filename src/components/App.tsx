@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import styles from ".././styles/App.module.css";
 import Block from "./Block";
 import prbIcon from ".././assets/prb-logo.jpg";
-// import sberIcon from ".././assets/sber-logo.jpeg";
 import agroIcon from ".././assets/agro-logo.jpg";
+import usdFlag from ".././assets/usd-flag.jpg";
+import eurFlag from ".././assets/eur-flag.jpg";
+import rubFlag from ".././assets/rub-flag.jpg";
+import mdlFlag from ".././assets/mdl-flag.jpg";
+import uahFlag from ".././assets/uah-flag.jpg";
 import axios from "axios";
 import { getCurrencies } from "./utils/getCurrencies";
 
@@ -30,17 +34,16 @@ const App = () => {
   const [receiveCurrency, setReceiveCurrency] = useState<string>("USD");
   const [selectedBank, setSelectedBank] = useState<string>("PRB");
   const [sellAmount, setSellAmount] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [conversionResult, setConversionResult] = useState<number>(0);
 
   useEffect(() => {
     const fetchRates = async () => {
-      setIsLoading(true);
       try {
         const response = await axios.get("https://server-converter-kiav.onrender.com/");
         const data = response.data;
 
-        if (data) {
+        if (data && (data.prb || data.sber || data.agro)) {
           const { agro, prb, sber } = data;
 
           setRates({
@@ -48,19 +51,18 @@ const App = () => {
             sber: sber || null,
             agro: agro || null,
           });
+          setIsLoading(false);
+        } else {
+          console.error("Данные о курсах валют не получены");
         }
       } catch (error) {
         console.error("Ошибка при запросе данных:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchRates();
   }, []);
 
-  console.log(rates);
-  
   const calculateConversion = (): number => {
     const selectedRates =
       selectedBank === "PRB"
@@ -68,12 +70,12 @@ const App = () => {
         : selectedBank === "SBER"
         ? rates.sber
         : rates.agro;
-  
+
     if (!selectedRates) {
       console.error("Курсы не загружены для выбранного банка");
       return 0;
     }
-  
+
     if (sellCurrency === "RUP") {
       const receiveRate = selectedRates.find((rate) => rate.ticker === receiveCurrency);
       if (!receiveRate) {
@@ -82,30 +84,30 @@ const App = () => {
       }
       return sellAmount / receiveRate.buy;
     }
-  
+
     if (receiveCurrency === "RUP") {
       const sellRate = selectedRates.find((rate) => rate.ticker === sellCurrency);
       if (!sellRate) {
         console.error(`Курс для продажи ${sellCurrency} не найден`);
         return 0;
       }
-      return sellAmount * sellRate.sell; 
+      return sellAmount * sellRate.sell;
     }
-  
+
     const sellRate = selectedRates.find((rate) => rate.ticker === sellCurrency);
     const receiveRate = selectedRates.find((rate) => rate.ticker === receiveCurrency);
-  
+
     if (!sellRate) {
       console.error(`Курс для продажи ${sellCurrency} не найден`);
       return 0;
     }
-  
+
     if (!receiveRate) {
       console.error(`Курс для покупки ${receiveCurrency} не найден`);
       return 0;
     }
-  
-    return (sellAmount * sellRate.sell) / receiveRate.buy; 
+
+    return (sellAmount * sellRate.sell) / receiveRate.buy;
   };
 
   useEffect(() => {
@@ -146,6 +148,23 @@ const App = () => {
 
   const currencies = getCurrencies(selectedBank);
 
+  // Список валют для таблицы
+  const tableCurrencies = [
+    { ticker: "USD", flag: usdFlag },
+    { ticker: "EUR", flag: eurFlag },
+    { ticker: "RUB", flag: rubFlag },
+    { ticker: "MDL", flag: mdlFlag },
+    { ticker: "UAH", flag: uahFlag },
+  ];
+
+  // Получение курсов для выбранного банка
+  const selectedRates =
+    selectedBank === "PRB"
+      ? rates.prb
+      : selectedBank === "SBER"
+      ? rates.sber
+      : rates.agro;
+
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
@@ -176,7 +195,7 @@ const App = () => {
         <div className={styles.swapButton} onClick={handleSwap}>
           <img
             className={styles.imageSwap}
-            src="https://cdn-icons-png.flaticon.com/512/7133/7133490.png" 
+            src="https://cdn-icons-png.flaticon.com/512/7133/7133490.png"
             alt="⟷"
           />
         </div>
@@ -195,6 +214,34 @@ const App = () => {
         />
       </div>
 
+      {/* Таблица курсов */}
+      <div className={styles.ratesTable}>
+        <table>
+          <thead>
+            <tr>
+              <th>Валюта</th>
+              <th>Покупка</th>
+              <th>Продажа</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableCurrencies.map(({ ticker, flag }) => {
+              const rate = selectedRates?.find((r) => r.ticker === ticker);
+              return (
+                <tr key={ticker}>
+                  <td>
+                    <img src={flag} alt={`${ticker} flag`} className={styles.flagIcon} />
+                    {ticker}
+                  </td>
+                  <td>{rate ? rate.buy.toFixed(2) : "0,00"}</td>
+                  <td>{rate ? rate.sell.toFixed(2) : "0,00"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
       <div className={styles.bankSelector}>
         <button
           className={`${styles.bankButton} ${
@@ -204,14 +251,6 @@ const App = () => {
         >
           <img src={prbIcon} alt="PRB" className={styles.bankIcon} />
         </button>
-      {/* <button
-          className={`${styles.bankButton} ${
-            selectedBank === "SBER" ? styles.activeBank : ""
-          }`}
-          onClick={() => setSelectedBank("SBER")}
-        >
-          <img src={sberIcon} alt="SBER" className={styles.bankIcon} />
-        </button> */}
         <button
           className={`${styles.bankButton} ${
             selectedBank === "AGRO" ? styles.activeBank : ""
