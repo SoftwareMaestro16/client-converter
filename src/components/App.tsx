@@ -34,7 +34,7 @@ const App = () => {
   const [receiveCurrency, setReceiveCurrency] = useState<string>("USD");
   const [selectedBank, setSelectedBank] = useState<string>("PRB");
   const [sellAmount, setSellAmount] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [conversionResult, setConversionResult] = useState<number>(0);
 
   useEffect(() => {
