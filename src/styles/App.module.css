@@ -50,7 +50,7 @@ body {
 }
 
 .exchangeBlock {
-  width: 90%;
+  width: 85vw;
   max-width: 500px;
   margin: 20px auto;
   padding: 20px;
@@ -123,10 +123,8 @@ body {
   transition: all 0.3s ease; 
 }
 
-/* Существующие стили остаются без изменений */
-
 .ratesTable {
-  width: 90%;
+  width: 85vw;
   max-width: 500px;
   margin: 20px auto;
   padding: 15px;
