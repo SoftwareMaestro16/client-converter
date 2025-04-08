@@ -10,6 +10,13 @@ import mdlFlag from ".././assets/mdl-flag.jpg";
 import uahFlag from ".././assets/uah-flag.jpg";
 import axios from "axios";
 import { getCurrencies } from "./utils/getCurrencies";
+import WebApp from '@twa-dev/sdk';
+
+declare global {
+  interface Window {
+    Telegram?: any;
+  }
+}
 
 type Rate = {
   ticker: string;
@@ -36,6 +43,19 @@ const App = () => {
   const [sellAmount, setSellAmount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [conversionResult, setConversionResult] = useState<number>(0);
+
+  useEffect(() => {
+    const isTgCheck = typeof window !== 'undefined' && window.Telegram?.WebApp?.initData;
+
+    if (isTgCheck) {
+      WebApp.ready();
+      WebApp.enableClosingConfirmation();
+      WebApp.expand();
+      WebApp.setHeaderColor('#ff0000'); 
+      
+      document.body.style.backgroundColor = '#ffffff';
+    }
+  }, []);
 
   useEffect(() => {
     const fetchRates = async () => {
